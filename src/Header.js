@@ -7,14 +7,28 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import { logout, selectUser } from './features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { auth } from './firebase';
+
+
+
 function Header() {
+
+
+  const dispatch = useDispatch();
+  const logoutOfApp=() =>{
+    dispatch(logout())
+    auth.signOut();
+  };
+
   return (
     <div className='header'>
       <div className="header__left">
           <img src="https://img.icons8.com/color/452/linkedin-circled--v1.png" alt="aaa" />
           <div className="header__search">
             <SearchIcon />    
-            <input type="text" />
+            <input placeholder='Search' type="text" />
           </div>
 
       </div>
@@ -25,7 +39,7 @@ function Header() {
         <HeaderOption Icon={BusinessCenterIcon} title='Jobs'/>
         <HeaderOption Icon={ChatBubbleOutlineIcon} title='Chats'/>
         <HeaderOption Icon={NotificationsActiveIcon} title='Notifications'/>
-        <HeaderOption avatar="https://www.cranbrooktowncouncil.gov.uk/wp-content/uploads/2016/11/avatar-159236_1280.png" title='me'/>
+        <HeaderOption onClick={logoutOfApp} avatar={true} title='me'/>
 
       
       
